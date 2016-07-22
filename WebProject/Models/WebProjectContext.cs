@@ -20,5 +20,7 @@ namespace WebProject.Models
         }
 
         public System.Data.Entity.DbSet<WebProject.Models.Team> Teams { get; set; }
+
+        public System.Data.Entity.DbSet<WebProject.Models.Player> Players { get; set; }
     }
 }

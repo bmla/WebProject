@@ -6,14 +6,14 @@ namespace WebProject.Models
     public class Player
     {
         public int PlayerId { get; set; }
-        [Required, MaxLength(256)]
+        [Required(ErrorMessage = "Player must have a firstname", AllowEmptyStrings = false), MaxLength(256)]
         public string Firstname { get; set; }
-        [Required, MaxLength(256)]
+        [Required(ErrorMessage = "Player must have a lastname", AllowEmptyStrings = false), MaxLength(256)]
         public string Lastname { get; set; }
-        [Required, DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{dd/MM/yyyy}")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public DateTime Birthday { get; set; }
-        [Required, Range(0,99)]
+        [Required(ErrorMessage = "Player number must be specified"), Range(0,99)]
         public int PlayerNumber { get; set; }
         public int TeamId { get; set; }
         public Team Team { get; set; }

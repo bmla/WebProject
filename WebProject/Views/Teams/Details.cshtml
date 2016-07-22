@@ -1,4 +1,6 @@
-﻿@model WebProject.Models.Team
+﻿@using System.Web.UI.HtmlControls
+@using WebProject.Models
+@model WebProject.Models.ViewModels.TeamPlayers
 
 @{
     ViewBag.Title = "Details";
@@ -11,16 +13,57 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.Team.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.Team.Name)
         </dd>
-
     </dl>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Player.Firstname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player.Lastname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player.Birthday)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player.PlayerNumber)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.Team.Players)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Firstname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lastname)
+                </td>
+                <td>
+                    @item.Birthday.ToString("d. MMM yyyy")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlayerNumber)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "Players", new { id = item.PlayerId }, null) |
+                    @Html.ActionLink("Details", "Details", "Players", new {id = item.PlayerId}, null) |
+                    @Html.ActionLink("Delete", "Delete", "Players", new {id = item.PlayerId}, null)
+                </td>
+            </tr>
+        }
+
+    </table>
+
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.TeamId }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Team.TeamId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

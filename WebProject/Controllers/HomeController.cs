@@ -15,19 +15,5 @@ namespace WebProject.Controllers
             ViewBag.Title = "Home";
             return View();
         }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "";
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Title = "Contact";
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
     }
 }

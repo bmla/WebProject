@@ -1,0 +1,58 @@
+﻿@using WebProject.Models
+@model IEnumerable<WebProject.Models.Player>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Team.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Firstname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Lastname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Birthday)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PlayerNumber)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Team.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Firstname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lastname)
+        </td>
+        <td>
+            @item.Birthday.ToString("d. MMM yyyy")
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PlayerNumber)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PlayerId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PlayerId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PlayerId })
+        </td>
+    </tr>
+}
+
+</table>

@@ -7,117 +7,115 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebProject.Models;
-using WebProject.Models.ViewModels;
 
 namespace WebProject.Controllers
 {
-    public class TeamsController : Controller
+    public class PlayersController : Controller
     {
         private WebProjectContext db = new WebProjectContext();
 
-        // GET: Teams
+        // GET: Players
         public ActionResult Index()
         {
-            return View(db.Teams.ToList());
+            var players = db.Players.Include(p => p.Team);
+            return View(players.ToList());
         }
 
-        // GET: Teams/Details/5
+        // GET: Players/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TeamPlayers tp = new TeamPlayers();
-            tp.Team = db.Teams.Find(id);
-            if (tp.Team == null)
+            Player player = db.Players.Find(id);
+            if (player == null)
             {
                 return HttpNotFound();
             }
-            else
-            {
-                List<Player> query2 = (from player in db.Players where player.TeamId == id select player).ToList();
-                tp.Team.Players = query2;
-            }
-            return View(tp);
+            return View(player);
         }
 
-        // GET: Teams/Create
+        // GET: Players/Create
         public ActionResult Create()
         {
+            ViewBag.TeamId = new SelectList(db.Teams, "TeamId", "Name");
             return View();
         }
 
-        // POST: Teams/Create
+        // POST: Players/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TeamId,Name")] Team team)
+        public ActionResult Create([Bind(Include = "PlayerId,Firstname,Lastname,Birthday,PlayerNumber,TeamId")] Player player)
         {
             if (ModelState.IsValid)
             {
-                db.Teams.Add(team);
+                db.Players.Add(player);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(team);
+            ViewBag.TeamId = new SelectList(db.Teams, "TeamId", "Name", player.TeamId);
+            return View(player);
         }
 
-        // GET: Teams/Edit/5
+        // GET: Players/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Team team = db.Teams.Find(id);
-            if (team == null)
+            Player player = db.Players.Find(id);
+            if (player == null)
             {
                 return HttpNotFound();
             }
-            return View(team);
+            ViewBag.TeamId = new SelectList(db.Teams, "TeamId", "Name", player.TeamId);
+            return View(player);
         }
 
-        // POST: Teams/Edit/5
+        // POST: Players/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TeamId,Name")] Team team)
+        public ActionResult Edit([Bind(Include = "PlayerId,Firstname,Lastname,Birthday,PlayerNumber,TeamId")] Player player)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(team).State = EntityState.Modified;
+                db.Entry(player).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(team);
+            ViewBag.TeamId = new SelectList(db.Teams, "TeamId", "Name", player.TeamId);
+            return View(player);
         }
 
-        // GET: Teams/Delete/5
+        // GET: Players/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Team team = db.Teams.Find(id);
-            if (team == null)
+            Player player = db.Players.Find(id);
+            if (player == null)
             {
                 return HttpNotFound();
             }
-            return View(team);
+            return View(player);
         }
 
-        // POST: Teams/Delete/5
+        // POST: Players/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Team team = db.Teams.Find(id);
-            db.Teams.Remove(team);
+            Player player = db.Players.Find(id);
+            db.Players.Remove(player);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
