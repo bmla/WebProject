@@ -52,6 +52,10 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.5, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9.5\lib\Net45\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -157,6 +161,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MatchesController.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
     <Compile Include="Controllers\TeamsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -165,6 +170,18 @@
     <Compile Include="Migrations\201607220142461_BirthdayNullable.cs" />
     <Compile Include="Migrations\201607220142461_BirthdayNullable.Designer.cs">
       <DependentUpon>201607220142461_BirthdayNullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608121336161_Matches.cs" />
+    <Compile Include="Migrations\201608121336161_Matches.Designer.cs">
+      <DependentUpon>201608121336161_Matches.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608121405566_Matches1.cs" />
+    <Compile Include="Migrations\201608121405566_Matches1.Designer.cs">
+      <DependentUpon>201608121405566_Matches1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608121441548_MatchesRefNull.cs" />
+    <Compile Include="Migrations\201608121441548_MatchesRefNull.Designer.cs">
+      <DependentUpon>201608121441548_MatchesRefNull.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Goal.cs" />
@@ -199,6 +216,7 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="ClassDiagram1.cd" />
+    <Content Include="ClassDiagram2.cd" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -233,6 +251,12 @@
     <Content Include="Views\Players\Details.cshtml" />
     <Content Include="Views\Players\Edit.cshtml" />
     <Content Include="Views\Players\Index.cshtml" />
+    <Content Include="Views\Matches\Create.cshtml" />
+    <Content Include="Views\Matches\Delete.cshtml" />
+    <Content Include="Views\Matches\Details.cshtml" />
+    <Content Include="Views\Matches\Edit.cshtml" />
+    <Content Include="Views\Matches\Index.cshtml" />
+    <Content Include="Views\Matches\Parse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -248,6 +272,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201607220142461_BirthdayNullable.resx">
       <DependentUpon>201607220142461_BirthdayNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608121336161_Matches.resx">
+      <DependentUpon>201608121336161_Matches.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608121405566_Matches1.resx">
+      <DependentUpon>201608121405566_Matches1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608121441548_MatchesRefNull.resx">
+      <DependentUpon>201608121441548_MatchesRefNull.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

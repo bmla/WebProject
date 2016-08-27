@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Web;
 
@@ -22,5 +23,15 @@ namespace WebProject.Models
         public System.Data.Entity.DbSet<WebProject.Models.Team> Teams { get; set; }
 
         public System.Data.Entity.DbSet<WebProject.Models.Player> Players { get; set; }
+
+        public System.Data.Entity.DbSet<WebProject.Models.Match> Matches { get; set; }
+
+        public System.Data.Entity.DbSet<WebProject.Models.Referee> Referees { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+        }
     }
 }
